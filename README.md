@@ -7,3 +7,4 @@ En este repositorio se alojan ejemplos sobre cómo compilar bucles anidados. En 
 En el archivo `nested_while.cc` se encuentra un bucle anidado que acumula el valor de las variables `i` y `j` en la variable `accum`, de tal manera que la suma final resulta en 900 si las constantes `ROW_MAX` y `ROW_COL` valen 10 cada una.
 
 Para compilar un bucle *while* anidado se requiere aplicar individualmente la estrategia de traducción del bucle sencillo.
+
