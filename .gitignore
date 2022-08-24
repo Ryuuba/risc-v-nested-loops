@@ -1,4 +1,3 @@
 *.exe
 *.out
-nested_for.cc
 nested_for.s
