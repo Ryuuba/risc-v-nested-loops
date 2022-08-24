@@ -113,16 +113,16 @@ En el archivo `nested_while.s` se encuentra el código de la compilación del ar
 ```
         addi s1, zero, 0
         addi s2, zero, 0
-        j    wh1                # external loop
+        j    wh1                # outer while loop
 L2:     addi s3, zero, 0
-        j    wh2                # internal loop
+        j    wh2                # inner while loop
 L1:     add  t0, s1, s3
         add  s2, s2, t0
         addi s3, s3, 1
-wh2:    addi t0, zero, 10       # loop condition (internal)
+wh2:    addi t0, zero, 10       # loop condition (inner)
         blt  s3, t0, L1
         addi s1, s1, 1
-wh1:    addi t0, zero, 10       # loop condition (external)
+wh1:    addi t0, zero, 10       # loop condition (outer)
         blt  s1, t0, L2
         nop
 ```
