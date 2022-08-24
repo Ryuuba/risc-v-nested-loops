@@ -95,5 +95,35 @@ La condición del bucle se traduce en las siguientes dos instrucciones RISC-V. D
 | `j < COL_MAX` | `wh2: addi t0, zero, 10` |
 |               | `blt s1, t0, L2`         |
 
-## Compilación completa
+El resultado de compilar el bucle interno se muestra en la siguiente tabla.
+
+| C++                   | RISC-V                   |
+| --------------------- | ------------------------ |
+| `while (j < COL_MAX)` | `j wh2`                  |
+| `{`                   | `L2: add t0, s1, s3`     |
+| `accum += i + j;`     | `add s2, s2, t0`         |
+| `j++;`                | `addi s3, s3, 1`         |
+| `}`                   | `wh2: addi t0, zero, 10` |
+|                       | `blt s1, t0, L2`         |
+
+## Resultado de la compilación
+
+En el archivo `nested_while.s` se encuentra el código de la compilación del archivo `nested_while.cc`.
+
+```
+        addi s1, zero, 0
+        addi s2, zero, 0
+        j    wh1                # external loop
+L2:     addi s3, zero, 0
+        j    wh2                # internal loop
+L1:     add  t0, s1, s3
+        add  s2, s2, t0
+        addi s3, s3, 1
+wh2:    addi t0, zero, 10       # loop condition (internal)
+        blt  s3, t0, L1
+        addi s1, s1, 1
+wh1:    addi t0, zero, 10       # loop condition (external)
+        blt  s1, t0, L2
+        nop
+```
 
